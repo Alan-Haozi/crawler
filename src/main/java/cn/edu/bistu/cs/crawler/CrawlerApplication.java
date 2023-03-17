@@ -15,7 +15,7 @@ public class CrawlerApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         String alan = HelloWorld.sayHello("这是一个启动类");
         System.out.println(alan);
     }
