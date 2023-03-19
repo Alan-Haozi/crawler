@@ -59,7 +59,7 @@ public class UserDaoImpl implements UserDao {
     @Transactional
     public boolean updateByName(String name, String password, String role) {
         try {
-            String sql = "UPDATE user SET password = ?, role = ? WHERE name = ?";
+            String sql = "update user SET password = ?, role = ? where name = ?";
             Object[] params = {password, role, name};
             resetIncrement();
             int result = jdbcTemplate.update(sql, params);
@@ -74,12 +74,13 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    @Transactional
     public boolean deleteByName(String name) {
         try {
             String sql = "delete from user where name=?";
             Object[] params = {name};
             resetIncrement();
-            if(jdbcTemplate.update(sql,params)<=0){
+            if (jdbcTemplate.update(sql, params) <= 0) {
                 throw new RuntimeException();
             }
         } catch (RuntimeException e) {
@@ -88,9 +89,9 @@ public class UserDaoImpl implements UserDao {
         }
         return true;
     }
-
+    @Override
     public void resetIncrement() {
-        String sql = "ALTER TABLE user AUTO_INCREMENT = 1";
+        String sql = "alter table user AUTO_INCREMENT = 1";
         jdbcTemplate.execute(sql);
     }
 }

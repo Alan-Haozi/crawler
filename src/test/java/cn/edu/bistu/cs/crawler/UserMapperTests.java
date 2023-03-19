@@ -11,7 +11,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.sql.SQLException;
 import java.util.List;
 
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserMapperTests {
@@ -41,7 +40,7 @@ public class UserMapperTests {
     //增操作
     @Test
     public void addUser() {
-        boolean result = userDaoImpl.addUser("flan", "123456", "user");
+        boolean result = userDaoImpl.addUser("glan", "123456", "user");
         if (result) System.out.println("添加用户成功");
     }
 

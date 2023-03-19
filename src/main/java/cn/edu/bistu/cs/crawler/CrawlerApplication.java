@@ -9,16 +9,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import javax.annotation.Resource;
 
 @SpringBootApplication
-public class CrawlerApplication implements CommandLineRunner {
+public class CrawlerApplication/* implements CommandLineRunner*/ {
     public static void main(String[] args) {
         SpringApplication.run(CrawlerApplication.class, args);
     }
 
-    @Override
+/*    @Override
     public void run(String... args) {
         String alan = HelloWorld.sayHello("这是一个启动类");
         System.out.println(alan);
-    }
+    }*/
 }
 
 
