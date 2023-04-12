@@ -26,6 +26,11 @@ public class CrawlerDataDaoImpl implements CrawlerDataDao {
         String sql = "select * from crawlerdata where id =" + id;
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(CrawlerData.class));
     }
+    @Override
+    public List<CrawlerData> selectByName(String name) {
+        String sql = "select * from crawlerdata where username ='" + name + "'";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(CrawlerData.class));
+    }
 
     @Override
     @Transactional
@@ -33,8 +38,7 @@ public class CrawlerDataDaoImpl implements CrawlerDataDao {
         try {
             CrawlerData crawlerData = new CrawlerData(url, content, time, username, success);
             String sql = "insert into crawlerdata(url,content,time,username,success)values(?,?,?,?,?)";
-            Object[] params = {crawlerData.getUrl(), crawlerData.getContent(),
-                    crawlerData.getTime(), crawlerData.getUsername(), crawlerData.getSuccess()};
+            Object[] params = {crawlerData.getUrl(), crawlerData.getContent(), crawlerData.getTime(), crawlerData.getUsername(), crawlerData.getSuccess()};
             resetIncrement();
             if (jdbcTemplate.update(sql, params) <= 0) {
                 throw new RuntimeException();
@@ -50,9 +54,8 @@ public class CrawlerDataDaoImpl implements CrawlerDataDao {
     @Transactional
     public boolean updateById(int id, String url, String content, LocalDateTime time, String username, int success) {
         try {
-//            CrawlerData crawlerData = new CrawlerData(id, url, content, time, username, success);
-            String sql = "update crawlerdata set url = ?, content = ?,time=?,"
-                    + "username=?, success=? where id = ?";
+            // CrawlerData crawlerData = new CrawlerData(id, url, content, time, username, success);
+            String sql = "update crawlerdata set url = ?, content = ?,time=?," + "username=?, success=? where id = ?";
             Object[] params = {url, content, time, username, success, id};
             resetIncrement();
             int result = jdbcTemplate.update(sql, params);

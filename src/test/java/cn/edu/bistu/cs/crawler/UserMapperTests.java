@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.sql.SQLException;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -55,7 +54,7 @@ public class UserMapperTests {
     @Test
     public void deleteByName() {
         boolean result = userDaoImpl.deleteByName("flan");
-        if (result) System.out.println("已成功删除用户");
+        if (result) System.out.println("删除用户成功");
     }
 }
 

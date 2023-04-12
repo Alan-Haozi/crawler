@@ -1,12 +1,12 @@
 package cn.edu.bistu.cs.crawler;
 
-import cn.edu.bistu.cs.crawler.service.HelloWorld;
+/*import cn.edu.bistu.cs.crawler.service.HelloWorld;
 import cn.edu.bistu.cs.crawler.service.impl.Helloworldimpl;
-import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.CommandLineRunner;*/
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import javax.annotation.Resource;
 
 @SpringBootApplication
 public class CrawlerApplication/* implements CommandLineRunner*/ {

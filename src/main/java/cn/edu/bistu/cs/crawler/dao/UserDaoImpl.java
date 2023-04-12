@@ -1,17 +1,12 @@
 package cn.edu.bistu.cs.crawler.dao;
 
 import cn.edu.bistu.cs.crawler.model.User;
-import org.apache.catalina.mbeans.UserMBean;
-import org.apache.ibatis.annotations.Select;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 
 @Service
@@ -89,6 +84,7 @@ public class UserDaoImpl implements UserDao {
         }
         return true;
     }
+
     @Override
     public void resetIncrement() {
         String sql = "alter table user AUTO_INCREMENT = 1";
