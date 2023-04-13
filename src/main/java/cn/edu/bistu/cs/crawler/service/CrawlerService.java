@@ -11,5 +11,8 @@ public interface CrawlerService {
     public abstract List<CrawlerData> crawlerPage(String name);
 
     //新增爬虫数据库内容
-    public abstract boolean crawlerDataCreate(String name, String content, String url);
+    public abstract boolean crawlerDataCreate(String name, String content, String url, String title);
+
+    //删除爬虫数据项
+    public abstract boolean crawlerDataDelete(int id);
 }

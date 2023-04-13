@@ -10,8 +10,9 @@ public class CrawlerData {
     private LocalDateTime time;
     private String username;
     private int success;
+    private String title;
 
-    private String formattedDateTime(){
+    private String formattedDateTime() {
         // 创建一个 DateTimeFormatter 对象
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         // time为一个LocalDateTime对象，此时使用 DateTimeFormatter 格式化 LocalDateTime 对象
@@ -25,22 +26,24 @@ public class CrawlerData {
     }
 
     //除id外构造器
-    public CrawlerData(String url, String content, LocalDateTime time, String username, int success) {
+    public CrawlerData(String url, String content, LocalDateTime time, String username, int success, String title) {
         this.url = url;
         this.content = content;
         this.time = time;
         this.username = username;
         this.success = success;
+        this.title = title;
     }
 
     //全参构造器
-    public CrawlerData(int id, String url, String content, LocalDateTime time, String username, int success) {
+    public CrawlerData(int id, String url, String content, LocalDateTime time, String username, int success, String title) {
         this.id = id;
         this.url = url;
         this.content = content;
         this.time = time;
         this.username = username;
         this.success = success;
+        this.title = title;
     }
 
     public int getId() {
@@ -83,25 +86,26 @@ public class CrawlerData {
         this.username = username;
     }
 
-    public int getSuccess() {
-        return success;
-    }
+    public int getSuccess() { return success; }
 
     public void setSuccess(int success) {
         this.success = success;
     }
 
+    public String getTitle() { return title; }
+
+    public void setTitle(String title) { this.title = title; }
+
     @Override
     public String toString() {
-
         return "CrawlerData{" +
                 "id=" + id +
                 ", url='" + url + '\'' +
                 ", content='" + content + '\'' +
-                //输出格式化后字符串
-                ", time=" + formattedDateTime() +
+                ", time=" + time +
                 ", username='" + username + '\'' +
                 ", success=" + success +
+                ", title='" + title + '\'' +
                 '}';
     }
 }

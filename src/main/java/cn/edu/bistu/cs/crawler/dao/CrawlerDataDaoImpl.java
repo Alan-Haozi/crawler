@@ -26,6 +26,7 @@ public class CrawlerDataDaoImpl implements CrawlerDataDao {
         String sql = "select * from crawlerdata where id =" + id;
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(CrawlerData.class));
     }
+
     @Override
     public List<CrawlerData> selectByName(String name) {
         String sql = "select * from crawlerdata where username ='" + name + "'";
@@ -34,11 +35,12 @@ public class CrawlerDataDaoImpl implements CrawlerDataDao {
 
     @Override
     @Transactional
-    public boolean addCrawlerData(String url, String content, LocalDateTime time, String username, int success) {
+    public boolean addCrawlerData(String url, String content, LocalDateTime time, String username, int success, String title) {
         try {
-            CrawlerData crawlerData = new CrawlerData(url, content, time, username, success);
-            String sql = "insert into crawlerdata(url,content,time,username,success)values(?,?,?,?,?)";
-            Object[] params = {crawlerData.getUrl(), crawlerData.getContent(), crawlerData.getTime(), crawlerData.getUsername(), crawlerData.getSuccess()};
+            CrawlerData crawlerData = new CrawlerData(url, content, time, username, success, title);
+            String sql = "insert into crawlerdata(url,content,time,username,success,title)values(?,?,?,?,?,?)";
+            Object[] params = {crawlerData.getUrl(), crawlerData.getContent(), crawlerData.getTime(),
+                    crawlerData.getUsername(), crawlerData.getSuccess(), crawlerData.getTitle()};
             resetIncrement();
             if (jdbcTemplate.update(sql, params) <= 0) {
                 throw new RuntimeException();
@@ -52,11 +54,12 @@ public class CrawlerDataDaoImpl implements CrawlerDataDao {
 
     @Override
     @Transactional
-    public boolean updateById(int id, String url, String content, LocalDateTime time, String username, int success) {
+    public boolean updateById(int id, String url, String content, LocalDateTime time, String username, int success, String title) {
         try {
             // CrawlerData crawlerData = new CrawlerData(id, url, content, time, username, success);
-            String sql = "update crawlerdata set url = ?, content = ?,time=?," + "username=?, success=? where id = ?";
-            Object[] params = {url, content, time, username, success, id};
+            String sql = "update crawlerdata set url = ?, content = ?,time=?,"
+                    + "username=?, success=?, title=? where id = ?";
+            Object[] params = {url, content, time, username, success, title, id};
             resetIncrement();
             int result = jdbcTemplate.update(sql, params);
             if (result <= 0) {

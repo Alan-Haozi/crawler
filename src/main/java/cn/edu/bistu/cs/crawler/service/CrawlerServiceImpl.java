@@ -20,12 +20,20 @@ public class CrawlerServiceImpl implements CrawlerService {
     }
 
     @Override
-    public boolean crawlerDataCreate(String name, String content, String url) {
+    public boolean crawlerDataCreate(String name, String content, String url, String title) {
         LocalDateTime nowTime = LocalDateTime.now();
         // 暂时先设 success= 1
         int success = 1;
         boolean result = crawlerDataDaoImpl
-                .addCrawlerData(url, content, nowTime, name, success);
+                .addCrawlerData(url, content, nowTime, name, success, title);
+        if (result)
+            return true;
+        return false;
+    }
+
+    @Override
+    public boolean crawlerDataDelete(int id) {
+        boolean result = crawlerDataDaoImpl.deleteById(id);
         if (result)
             return true;
         return false;
