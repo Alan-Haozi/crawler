@@ -32,7 +32,6 @@
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>3.0.0</version>
 		</dependency>
-
 		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
@@ -52,12 +51,25 @@
 		<dependency>
 			<groupId>us.codecraft</groupId>
 			<artifactId>webmagic-core</artifactId>
-			<version>0.7.5</version>
+			<version>0.8.0</version>
 		</dependency>
 		<dependency>
 			<groupId>us.codecraft</groupId>
 			<artifactId>webmagic-extension</artifactId>
 			<version>0.7.5</version>
+		</dependency>
+		<dependency>
+			<groupId>io.lettuce</groupId>
+			<artifactId>lettuce-core</artifactId>
+			<version>6.2.3.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-pool2</artifactId>
 		</dependency>
 	</dependencies>
 

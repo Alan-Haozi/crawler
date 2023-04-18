@@ -2,11 +2,14 @@ package cn.edu.bistu.cs.crawler;
 
 import cn.edu.bistu.cs.crawler.dao.CrawlerDataDaoImpl;
 import cn.edu.bistu.cs.crawler.model.CrawlerData;
+import io.lettuce.core.api.StatefulRedisConnection;
+import io.lettuce.core.api.sync.RedisCommands;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import io.lettuce.core.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -45,6 +48,7 @@ public class CrawlerDataMapperTests {
             System.out.println(b.toString());
         }
     }
+
     @Test
     public void selectByName() {
         String name = "alan";
@@ -59,14 +63,14 @@ public class CrawlerDataMapperTests {
 //        String datetime = "2019-04-08 15:07:30";
         boolean result = crawlerDataDaoImpl.addCrawlerData
                 ("aw", "qwe", toLocalDateTime("2019-04-08 15:07:30"),
-                        "alan", 1);
+                        "alan", 1, "title");
         if (result) System.out.println("添加数据成功");
     }
 
     @Test
     public void updateById() {
         boolean result = crawlerDataDaoImpl.updateById(2, "dinwd", "291dh",
-                toLocalDateTime("2023-12-11 13:24:56"), "blan", 1);
+                toLocalDateTime("2023-12-11 13:24:56"), "blan", 1, "title");
         if (result) System.out.println("更新数据成功");
     }
 

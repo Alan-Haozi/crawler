@@ -6,6 +6,7 @@ import cn.edu.bistu.cs.crawler.webmagic.CrawlerProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import us.codecraft.webmagic.Spider;
+import io.lettuce.core.*;
 
 import javax.annotation.Resource;
 //import java.util.Base64;

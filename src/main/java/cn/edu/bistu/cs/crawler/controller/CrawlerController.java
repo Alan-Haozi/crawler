@@ -28,4 +28,10 @@ public class CrawlerController {
         boolean result = crawlerService.crawlerDataDelete(id);
         return result;
     }
+
+    @GetMapping("/Content/{id}")
+    public String getCrawlerPage(@PathVariable int id) {
+        String page = crawlerService.crawlerContent(id);
+        return page;
+    }
 }

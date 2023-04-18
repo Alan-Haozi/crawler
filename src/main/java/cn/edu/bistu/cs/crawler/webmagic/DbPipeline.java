@@ -32,8 +32,17 @@ public class DbPipeline implements Pipeline {
         String html = resultItems.get("html");
         // 如果没有h1，String h1 = null值
         String title = resultItems.get("title");
-        // 如果title没有值，取h1的值
-        if (title==null) title = resultItems.get("h1");
+        String h1 = resultItems.get("h1");
+        // 如果title没有值，取h1的值，如果h1也没有值，则title取"暂无标题"
+        if (title != null) {
+            title = resultItems.get("title");
+        } else {
+            if (h1 != null) {
+                title = resultItems.get("h1");
+            }else {
+                title="暂无标题";
+            }
+        }
         //写数据库
         this.res = crawlerServiceImpl.crawlerDataCreate(this.name, html, url, title);
     }

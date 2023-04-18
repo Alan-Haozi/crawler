@@ -15,4 +15,7 @@ public interface CrawlerService {
 
     //删除爬虫数据项
     public abstract boolean crawlerDataDelete(int id);
+
+    //根据id返回页面
+    public abstract String crawlerContent(int id);
 }
