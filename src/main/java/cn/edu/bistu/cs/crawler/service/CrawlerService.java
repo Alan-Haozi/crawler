@@ -1,7 +1,6 @@
 package cn.edu.bistu.cs.crawler.service;
 
 import cn.edu.bistu.cs.crawler.model.CrawlerData;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
