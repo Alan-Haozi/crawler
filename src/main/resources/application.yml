@@ -5,7 +5,7 @@ spring:
     username: root
     password: 666666
   redis:
-    database: 0 #Redis数据库索引（默认为0）
+    database: 1 #Redis数据库索引（默认为0）
     host: 127.0.0.1 #192.168.1.2 #Redis服务器地址
     lettuce:
       pool:

@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 @Service
 public class DbPipeline implements Pipeline {
     public String name;
+    public String url;
     boolean res;
 
     // 无参构造
