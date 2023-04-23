@@ -41,6 +41,7 @@ public class CrawlerController {
     // 从前端获取url和对应的username，保存redis
     @PostMapping("/View")
     public String geturl(@RequestBody CrawlerDto crawlerDto) {
+        // 往redis存入用户名和url
         redisAccessServiceimpl.addredis(crawlerDto.getUsername(), crawlerDto.getUrl());
         return "存入成功";
     }

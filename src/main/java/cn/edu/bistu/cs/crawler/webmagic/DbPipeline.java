@@ -6,14 +6,16 @@ import org.springframework.stereotype.Service;
 import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
+import us.codecraft.webmagic.pipeline.ResultItemsCollectorPipeline;
 
 import javax.annotation.Resource;
 
 @Service
-public class DbPipeline implements Pipeline {
+public class DbPipeline extends ResultItemsCollectorPipeline implements Pipeline {
     public String name;
     public String url;
-    boolean res;
+    // 爬取结果，true为正常
+    public boolean res;
 
     // 无参构造
     public DbPipeline() {
@@ -40,11 +42,11 @@ public class DbPipeline implements Pipeline {
         } else {
             if (h1 != null) {
                 title = resultItems.get("h1");
-            }else {
-                title="暂无标题";
+            } else {
+                title = "暂无标题";
             }
         }
-        //写数据库
-        this.res = crawlerServiceImpl.crawlerDataCreate(this.name, html, url, title);
+        //写数据库，状态为 1
+        this.res = crawlerServiceImpl.crawlerDataCreate(this.name, html, url, title, 1);
     }
 }

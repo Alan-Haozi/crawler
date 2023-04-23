@@ -128,7 +128,7 @@ public class CrawlerTests {
     public void scheduled() {
         getCrawlerDto.getCrawlerDto();
     }
-
+    // 对象和json相互转换
     @Test
     public void Converter() {
         CrawlerDto crawlerDto = new CrawlerDto();

@@ -22,10 +22,9 @@ public class CrawlerServiceImpl implements CrawlerService {
 
     //新增爬虫数据库内容
     @Override
-    public boolean crawlerDataCreate(String name, String content, String url, String title) {
+    public boolean crawlerDataCreate(String name, String content, String url, String title, int success) {
+        // 获取当前时间
         LocalDateTime nowTime = LocalDateTime.now();
-        // 暂时先设 success= 1
-        int success = 1;
         boolean result = crawlerDataDaoImpl
                 .addCrawlerData(url, content, nowTime, name, success, title);
         if (result)

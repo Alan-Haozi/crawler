@@ -10,8 +10,6 @@ import javax.annotation.Resource;
 public class RedisAccessServiceImpl implements RedisAccessService {
     @Resource
     RedisAccessDaoImpl redisAccessDaoImpl;
-//    @Resource
-//    CrawlerDto crawlerDto;
 
     @Override
     public boolean addredis(String username, String url) {
