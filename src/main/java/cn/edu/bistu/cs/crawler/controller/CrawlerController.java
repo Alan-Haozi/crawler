@@ -45,4 +45,11 @@ public class CrawlerController {
         redisAccessServiceimpl.addredis(crawlerDto.getUsername(), crawlerDto.getUrl());
         return "存入成功";
     }
+
+    // 前端获取搜索内容
+    @GetMapping("/View/SearchContent/{searchContent}")
+    public List<CrawlerData> searchCrawlerData(@PathVariable String searchContent) {
+        System.out.println(searchContent);
+        return null;
+    }
 }

@@ -7,6 +7,7 @@ import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 import us.codecraft.webmagic.pipeline.ResultItemsCollectorPipeline;
+import us.codecraft.webmagic.selector.Html;
 
 import javax.annotation.Resource;
 
@@ -19,7 +20,6 @@ public class DbPipeline extends ResultItemsCollectorPipeline implements Pipeline
 
     // 无参构造
     public DbPipeline() {
-
     }
 
     public DbPipeline(CrawlerDto crawlerDto) {
@@ -33,6 +33,8 @@ public class DbPipeline extends ResultItemsCollectorPipeline implements Pipeline
     public void process(ResultItems resultItems, Task task) {
         String url = resultItems.getRequest().getUrl();
         String html = resultItems.get("html");
+//        Html page = new Html(html);
+//        page.xpath("/allText()").get();
         // 如果没有h1，String h1 = null值
         String title = resultItems.get("title");
         String h1 = resultItems.get("h1");

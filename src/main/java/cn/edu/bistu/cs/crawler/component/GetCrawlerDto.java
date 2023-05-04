@@ -15,6 +15,9 @@ public class GetCrawlerDto {
     RedisAccessServiceImpl redisAccessServiceImpl;
     @Resource
     DbPipeline dbPipeline;
+    // 带参数的自动注入
+    @Resource
+    Crawler crawler = new Crawler(dbPipeline);
 
     // 获取CrawlerDto数据，传给Crawler启动爬虫
     public void getCrawlerDto() {
@@ -22,7 +25,7 @@ public class GetCrawlerDto {
         if (crawlerDto != null) {
             dbPipeline.url = crawlerDto.getUrl();
             dbPipeline.name = crawlerDto.getUsername();
-            Crawler crawler = new Crawler(dbPipeline);
+//           不要用new: Crawler crawler = new Crawler(dbPipeline)，否则Crawler类中引用的其它对象不会实例化
             crawler.executeCrawler();
         }
     }

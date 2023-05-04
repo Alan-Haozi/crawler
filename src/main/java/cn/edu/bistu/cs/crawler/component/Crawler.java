@@ -33,11 +33,11 @@ public class Crawler {
                     .addUrl(dbPipeline.url)
                     .thread(5)      //开启5个线程
                     .addPipeline(dbPipeline).run();
-            // 如果没有爬取结果，抛出异常
-            if (!dbPipeline.res) {
-                throw new Exception("没有爬取结果");
-            }
         } catch (Exception e) {
+            System.out.println("异常");
+        }
+        // 如果没有爬取结果，抛出异常
+        if (!dbPipeline.res) {
             String content = "";
             String title = "";
             //写数据库，状态为 0，有问题：crawlerServiceImpl为空
