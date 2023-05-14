@@ -2,15 +2,12 @@ package cn.edu.bistu.cs.crawler;
 
 import cn.edu.bistu.cs.crawler.dao.CrawlerDataDaoImpl;
 import cn.edu.bistu.cs.crawler.model.CrawlerData;
-import io.lettuce.core.api.StatefulRedisConnection;
-import io.lettuce.core.api.sync.RedisCommands;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import io.lettuce.core.*;
 
+import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -18,7 +15,7 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CrawlerDataMapperTests {
-    @Autowired
+    @Resource
     CrawlerDataDaoImpl crawlerDataDaoImpl;
 
     //将一个String Datetime转换成LocalDateTime对象
@@ -50,6 +47,15 @@ public class CrawlerDataMapperTests {
     }
 
     @Test
+    public void selectByIdArray() {
+        int[] a = {1, 3};
+        List<CrawlerData> list = crawlerDataDaoImpl.selectByIdArray(a);
+        for (CrawlerData b : list) {
+            System.out.println(b.getTitle());
+        }
+    }
+
+    @Test
     public void selectByName() {
         String name = "alan";
         List<CrawlerData> list = crawlerDataDaoImpl.selectByName(name);
@@ -61,10 +67,10 @@ public class CrawlerDataMapperTests {
     @Test
     public void addCrawlerData() {
 //        String datetime = "2019-04-08 15:07:30";
-        boolean result = crawlerDataDaoImpl.addCrawlerData
+        int result = crawlerDataDaoImpl.addCrawlerData
                 ("aw", "qwe", toLocalDateTime("2019-04-08 15:07:30"),
                         "alan", 1, "title");
-        if (result) System.out.println("添加数据成功");
+        if (result > 0) System.out.println("添加数据成功");
     }
 
     @Test

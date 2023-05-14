@@ -9,6 +9,9 @@ public class CrawlerData {
     private String content;
     private LocalDateTime time;
     private String username;
+    /**
+     * 是否爬取成功，成功为1，失败为0
+     */
     private int success;
     private String title;
 

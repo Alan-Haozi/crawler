@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.StringJoiner;
 
 @Service
 public class CrawlerDataDaoImpl implements CrawlerDataDao {
@@ -28,6 +29,17 @@ public class CrawlerDataDaoImpl implements CrawlerDataDao {
     }
 
     @Override
+    public List<CrawlerData> selectByIdArray(int[] a) {
+        // 创建一个用逗号分隔的字符串拼接器，起始字符串为 "("，结束字符串为 ")"
+        StringJoiner joiner = new StringJoiner(",", "(", ")");
+        for (int id : a) {
+            joiner.add(String.valueOf(id));
+        }
+        String sql = "SELECT * FROM crawlerdata WHERE id IN " + joiner;
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(CrawlerData.class));
+    }
+
+    @Override
     public List<CrawlerData> selectByName(String name) {
         String sql = "select * from crawlerdata where username ='" + name + "'";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(CrawlerData.class));
@@ -35,21 +47,24 @@ public class CrawlerDataDaoImpl implements CrawlerDataDao {
 
     @Override
     @Transactional
-    public boolean addCrawlerData(String url, String content, LocalDateTime time, String username, int success, String title) {
-        try {
-            CrawlerData crawlerData = new CrawlerData(url, content, time, username, success, title);
-            String sql = "insert into crawlerdata(url,content,time,username,success,title)values(?,?,?,?,?,?)";
-            Object[] params = {crawlerData.getUrl(), crawlerData.getContent(), crawlerData.getTime(),
-                    crawlerData.getUsername(), crawlerData.getSuccess(), crawlerData.getTitle()};
-            resetIncrement();
-            if (jdbcTemplate.update(sql, params) <= 0) {
-                throw new RuntimeException();
-            }
-        } catch (RuntimeException e) {
+    public int addCrawlerData(String url, String content, LocalDateTime time, String username, int success, String title) {
+        CrawlerData crawlerData = new CrawlerData(url, content, time, username, success, title);
+        String sql = "insert into crawlerdata(url,content,time,username,success,title)values(?,?,?,?,?,?)";
+        Object[] params = {crawlerData.getUrl(), crawlerData.getContent(), crawlerData.getTime(),
+                crawlerData.getUsername(), crawlerData.getSuccess(), crawlerData.getTitle()};
+        resetIncrement();
+        if (jdbcTemplate.update(sql, params) <= 0) {
             System.out.println("添加数据失败");
-            return false;
+            return -1;
         }
-        return true;
+        // 获取自增id值
+        Integer generatedId = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+        if (generatedId == null) {
+            System.out.println("无法检索到生成的ID。");
+            return -1;
+        }
+        System.out.println("获取的id值：" + generatedId);
+        return generatedId;
     }
 
     @Override

@@ -133,7 +133,7 @@ public class CrawlerTests {
     public void Converter() {
         CrawlerDto crawlerDto = new CrawlerDto();
         crawlerDto.setUsername("alan");
-        crawlerDto.setUrl("12345");
+        crawlerDto.setUrl("121121");
         System.out.println("crawlerDto: " + crawlerDto);
         try {
             // 将对象转换为JSON字符串
@@ -144,7 +144,7 @@ public class CrawlerTests {
             CrawlerDto crawlerDto2 = mapper.readValue(jsonCrawlerDto, CrawlerDto.class);
             System.out.println("crawlerDto2: " + crawlerDto2);
         } catch (Exception e) {
-            System.out.println("1");
+            System.out.println("出错");
         }
     }
     //        redisTemplate.opsForList().leftPush("urlAccess", crawlerDto);

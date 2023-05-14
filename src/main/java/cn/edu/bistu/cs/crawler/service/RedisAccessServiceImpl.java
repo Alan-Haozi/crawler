@@ -13,9 +13,8 @@ public class RedisAccessServiceImpl implements RedisAccessService {
 
     @Override
     public boolean addredis(String username, String url) {
-        redisAccessDaoImpl.LpushData(username, url);
-        // 将来加异常处理
-        return true;
+        boolean res = redisAccessDaoImpl.LpushData(username, url);
+        return res;
     }
 
     @Override

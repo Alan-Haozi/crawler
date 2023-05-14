@@ -1,21 +1,24 @@
 package cn.edu.bistu.cs.crawler.component;
 
+import cn.edu.bistu.cs.crawler.model.HtmlIndex;
 import cn.edu.bistu.cs.crawler.service.CrawlerServiceImpl;
 import cn.edu.bistu.cs.crawler.webmagic.DbPipeline;
 import cn.edu.bistu.cs.crawler.webmagic.CrawlerProcessor;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import us.codecraft.webmagic.Spider;
+import us.codecraft.webmagic.selector.Html;
 //import java.util.Base64;
 
 import javax.annotation.Resource;
 
-@Service
+//爬虫类，启动爬虫，异常处理
+@Component
 public class Crawler {
     // 不用加 @Resource
     private final DbPipeline dbPipeline;
     @Resource
     CrawlerServiceImpl crawlerServiceImpl;
-
 
     public Crawler(DbPipeline dbPipeline) {
         this.dbPipeline = dbPipeline;
@@ -36,13 +39,13 @@ public class Crawler {
         } catch (Exception e) {
             System.out.println("异常");
         }
-        // 如果没有爬取结果，抛出异常
-        if (!dbPipeline.res) {
+        // 如果没有爬取结果，标记异常
+        if (dbPipeline.id < 0) {
             String content = "";
             String title = "";
-            //写数据库，状态为 0，有问题：crawlerServiceImpl为空
-            boolean res = crawlerServiceImpl.crawlerDataCreate(dbPipeline.name, content, dbPipeline.url, title, 0);
-            System.out.println(res);
+            // 写数据库，状态为 0，此时并没有运行process
+            int id = crawlerServiceImpl.crawlerDataCreate(dbPipeline.name, content, dbPipeline.url, title, 0);
+            System.out.println(id);
         }
     }
 }

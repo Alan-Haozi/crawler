@@ -22,14 +22,14 @@ public class CrawlerServiceImpl implements CrawlerService {
 
     //新增爬虫数据库内容
     @Override
-    public boolean crawlerDataCreate(String name, String content, String url, String title, int success) {
+    public int crawlerDataCreate(String name, String content, String url, String title, int success) {
         // 获取当前时间
         LocalDateTime nowTime = LocalDateTime.now();
-        boolean result = crawlerDataDaoImpl
+        int id = crawlerDataDaoImpl
                 .addCrawlerData(url, content, nowTime, name, success, title);
-        if (result)
-            return true;
-        return false;
+        if (id > 0)
+            return id;
+        return -1;
     }
 
     //删除爬虫数据项
@@ -47,5 +47,19 @@ public class CrawlerServiceImpl implements CrawlerService {
         // get(int n)用于获取List第n个元素，每个元素都是crawlerData
         String content = crawlerData.get(0).getContent();
         return content;
+    }
+
+    @Override
+    public List<CrawlerData> crawlerPageArray(int[] a) {
+        List<CrawlerData> list = crawlerDataDaoImpl.selectByIdArray(a);
+        return list;
+    }
+
+    @Override
+    public int isSuccess(int id) {
+        List<CrawlerData> crawlerData = crawlerDataDaoImpl.selectById(id);
+        // get(int n)用于获取List第n个元素，每个元素都是crawlerData
+        int success = crawlerData.get(0).getSuccess();
+        return success;
     }
 }
