@@ -9,5 +9,4 @@ import lombok.ToString;
 public class LoginDto {
     private String username;
     private String password;
-
 }

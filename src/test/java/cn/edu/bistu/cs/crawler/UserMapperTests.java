@@ -56,6 +56,7 @@ public class UserMapperTests {
         boolean result = userDaoImpl.deleteByName("flan");
         if (result) System.out.println("删除用户成功");
     }
+
 }
 
 
