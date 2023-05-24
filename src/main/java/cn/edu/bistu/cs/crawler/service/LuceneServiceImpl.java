@@ -54,6 +54,12 @@ public class LuceneServiceImpl implements LuceneService {
 
     @Override
     public boolean deleteLucene(int id) {
+        try {
+            indexService.deleteDocumentById(id);
+        } catch (Exception e) {
+            System.out.println("LuceneServiceImpl类deleteLucene方法：删除索引出错");
+            return false;
+        }
         return true;
     }
 }

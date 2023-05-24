@@ -8,6 +8,7 @@ public class User {
 
     public User() {
     }
+
     //除id外构造器
     public User(String name, String password, String role) {
         this.name = name;
