@@ -101,7 +101,7 @@ public class IndexService implements DisposableBean {
                 .build();
         BooleanQuery query = new BooleanQuery.Builder()
                 .add(queryA, BooleanClause.Occur.MUST)
-                .add(query3, BooleanClause.Occur.SHOULD)
+                .add(query3, BooleanClause.Occur.MUST)
                 .build();
         // 返回的结果是 按照匹配度排名得分前n名的文档信息（包含查询到的总条数信息、所有符合条件的文档的编号信息）。
         TopDocs topDocs = searcher.search(query, 10);
